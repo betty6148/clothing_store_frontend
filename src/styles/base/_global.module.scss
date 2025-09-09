@@ -1,0 +1,14 @@
+@use "../utils/variables.module" as vars;
+
+body {
+	background: vars.$gray-100;
+}
+
+a {
+	color: vars.$primary;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}

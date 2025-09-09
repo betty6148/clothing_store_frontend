@@ -1,17 +1,18 @@
 // Utils
-@use "./utils/variables" as *;
-@use "./utils/mixins" as *;
+@use "./utils/_variables.module" as *;
+@use "./utils/_mixins.module" as *;
 
 // Base
-@import "./base/reset";
-@import "./base/global";
-@import "./base/typography";
+@use "./base/_reset.module" as *;
+@use "./base/_global.module" as *;
+@use "./base/_typography.module" as *;
 
 // Layout
-@import "./layout/navbar";
-@import "./layout/footer";
-@import "./layout/grid";
+@use "./layout/_navbar.module" as *;
+@use "./layout/_footer.module" as *;
+@use "./layout/_grid.module" as *;
+@use "./layout/_header.module" as *;
 
 // Components
-// @import "./components/buttons";
-// @import "./components/cards";
+// @use "./components/buttons" as *;
+// @use "./components/cards" as *;

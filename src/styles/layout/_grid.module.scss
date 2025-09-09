@@ -1,0 +1,15 @@
+@use "../utils/mixins.module" as mixins;
+
+.container {
+	@include mixins.container();
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 720px 6fr;
+	gap: 2rem;
+
+	@include mixins.respond(md) {
+		grid-template-columns: 1fr;
+	}
+}

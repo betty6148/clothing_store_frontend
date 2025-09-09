@@ -1,0 +1,17 @@
+.carousel {
+	background-color: #f8f;
+	width: 100%;
+}
+
+.slides {
+	display: flex;
+	gap: 12px;
+	width: 100%;
+}
+.slide {
+	background-color: #fff;
+	width: 240px;
+	height: 360px;
+	margin: 12px;
+	border-radius: 12px;
+}

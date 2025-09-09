@@ -1,0 +1,16 @@
+@use "../utils/variables.module" as vars;
+@use "../utils/mixins.module" as mixins;
+
+.header {
+	background: vars.$primary;
+	height: 72px;
+	@include mixins.flex-center;
+	justify-content: space-around;
+
+	.headerMenu {
+		background: #fff;
+		width: 50%;
+		display: flex;
+		justify-content: space-around;
+	}
+}

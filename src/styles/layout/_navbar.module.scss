@@ -1,6 +1,9 @@
+@use "../utils/variables.module" as vars;
+@use "../utils/mixins.module" as mixins;
+
 .navbar {
-	@include container();
-	@include flex-center;
+	@include mixins.container();
+	@include mixins.flex-center;
 	justify-content: space-between;
 	padding: 1rem 0;
 	background: white;
@@ -9,7 +12,7 @@
 	.logo {
 		font-size: 1.5rem;
 		font-weight: bold;
-		color: $primary;
+		color: vars.$primary;
 	}
 
 	.menu {
@@ -21,7 +24,7 @@
 			transition: color 0.3s;
 
 			&:hover {
-				color: $secondary;
+				color: vars.$secondary;
 			}
 		}
 	}

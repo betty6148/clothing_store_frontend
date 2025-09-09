@@ -1,5 +1,6 @@
+@use "../utils/variables.module" as vars;
 .footer {
-	background: $gray-900;
+	background: vars.$gray-900;
 	color: white;
 	padding: 2rem 0;
 	text-align: center;
