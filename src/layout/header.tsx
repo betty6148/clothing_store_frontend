@@ -4,7 +4,7 @@ import styles from "../styles/layout/_header.module.scss";
 const Header = () => {
   return (
     <div className={styles.header}>
-      <img src="#" alt="LOGO" />
+      <img className={styles.logo} src="../../public/taurus.png" alt="LOGO" />
       <HaederMenu />
     </div>
   );

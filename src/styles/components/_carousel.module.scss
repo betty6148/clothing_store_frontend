@@ -1,26 +1,42 @@
 .carousel {
-	background-color: #f8f;
 	width: 100%;
+	position: relative;
 }
 
+.dotted_rectangle {
+	width: 200px; /* 長方形寬度 */
+	height: 300px; /* 長方形高度 */
+	background-color: transparent; /* 背景色，方便看白點 */
+	background-image: radial-gradient(white 2px, transparent 2px);
+	background-size: 10px 10px; /* 點的間距 */
+	position: absolute;
+	top: -32px;
+	left: -18px;
+}
 .slides {
 	display: flex;
 	gap: 12px;
 	width: 100%;
 }
 .slide {
+	background-size: cover; /* 讓背景圖填滿 */
+	background-position: center; /* 圖片置中 */
+	background-repeat: no-repeat; /* 不重複 */
 	background-color: #fff;
 	width: 240px;
 	height: 360px;
 	margin: 12px;
 	border-radius: 12px;
 	position: relative;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 
 	p {
 		font-size: xx-large;
 		position: absolute;
 		bottom: 0;
 		left: 0;
+		color: #fff;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 	}
 }
 .slide_controler {
@@ -46,6 +62,34 @@
 			background-color: transparent;
 			cursor: pointer;
 		}
+		button:hover {
+			box-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+		}
+
+		/* 點擊效果 */
+		button:active {
+			transform: scale(0.9); /* 縮小 10% */
+			box-shadow: 0 0 2px rgba(255, 255, 255, 0.3) inset; /* 內凹感 */
+		}
+	}
+
+	.slide1 {
+		background-image: url("https://images.pexels.com/photos/2112651/pexels-photo-2112651.jpeg");
+	}
+	.slide2 {
+		background-image: url("/images/slide2.jpg");
+	}
+	.slide3 {
+		background-image: url("/images/slide3.jpg");
+	}
+	.slide4 {
+		background-image: url("/images/slide4.jpg");
+	}
+	.slide5 {
+		background-image: url("/images/slide5.jpg");
+	}
+	.slide6 {
+		background-image: url("/images/slide6.jpg");
 	}
 
 	.decoration_line {

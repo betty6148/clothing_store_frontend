@@ -1,4 +1,8 @@
 .text_block {
+	margin: 36px;
+	color: #fff;
+	font-size: x-large;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 	button {
 		appearance: none;
 		outline: none;
@@ -6,9 +10,11 @@
 		width: 120px;
 		font-size: medium;
 		margin: auto;
+		border: 2px solid #fff;
 		border-radius: 36px;
 		color: #fff;
-		background-color: #000;
+		background-color: transparent;
 		cursor: pointer;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 	}
 }

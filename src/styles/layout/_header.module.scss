@@ -2,15 +2,46 @@
 @use "../utils/mixins.module" as mixins;
 
 .header {
-	background: vars.$primary;
+	background: transparent;
 	height: 72px;
+	padding: 16px;
 	@include mixins.flex-center;
-	justify-content: space-around;
+	justify-content: space-between;
+	margin: 0 52px;
 
+	.logo {
+		width: 36px;
+		height: 36px;
+		margin: 12px;
+	}
 	.headerMenu {
-		background: #fff;
 		width: 50%;
 		display: flex;
 		justify-content: space-around;
+		color: #fff;
+
+		a {
+			color: #fff;
+			display: block;
+			padding-bottom: 5px;
+			position: relative;
+			text-decoration: none;
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+		}
+
+		a::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 0;
+			height: 2px;
+			background: #fff;
+			transition: width 0.3s;
+		}
+
+		a:hover::after {
+			width: 100%;
+		}
 	}
 }
