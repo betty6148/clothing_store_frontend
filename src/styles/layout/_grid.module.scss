@@ -5,8 +5,10 @@
 }
 
 .grid {
+	@include mixins.flex-center;
 	display: grid;
 	grid-template-columns: 720px 6fr;
+	height: 100%;
 	gap: 2rem;
 
 	@include mixins.respond(md) {
