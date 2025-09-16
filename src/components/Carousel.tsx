@@ -3,27 +3,27 @@ import styles from "../styles/components/_carousel.module.scss";
 import { useEffect, useRef, useState } from "react";
 
 const images = [
-  { id: 1,
+  { id: 0,
     img: "https://images.pexels.com/photos/2112651/pexels-photo-2112651.jpeg",
     title: "T-Shirt",
   },
-  { id: 2,
+  { id: 1,
     img: "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_3000,w_2000,f_auto,q_auto/8294205/724027_531108.png",
     title: "Pants",
   },
-  { id: 3,
+  { id: 2,
     img: "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_3000,w_2000,f_auto,q_auto/8294205/475489_199739.jpeg",
     title: "Outer",
   },
-  { id: 4,
+  { id: 3,
     img: "https://images.pexels.com/photos/2210899/pexels-photo-2210899.jpeg",
     title: "Hoodies",
 },
-  { id: 5,
+  { id: 4,
     img: "https://media.etmall.com.tw/nximg/006274/6274363/6274363_xxl.jpg?t=22258414987",
     title: "Vest",
 },
-  { id: 6,
+  { id: 5,
     img: "https://images.pexels.com/photos/2494607/pexels-photo-2494607.jpeg",
     title: "Accessories",
 },
@@ -43,7 +43,7 @@ const Carousel = () => {
 
   const [offset, setOffset] = useState(0); // translate 偏移
   const [animating, setAnimating] = useState(false);
-const [currentIndex, setCurrentIndex] = useState(1);
+const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     if (!slidesRef.current) return;
     Array.from(slidesRef.current.children).forEach((el) => {
@@ -113,7 +113,7 @@ const [currentIndex, setCurrentIndex] = useState(1);
           </button>
         </div>
         <div className={styles.decoration_line}></div>
-        <p>{String(currentIndex).padStart(2, "0")}</p>
+        <p>{String((currentIndex % images.length) + 1).padStart(2, "0")}</p>
       </div>
     </div>
   );
