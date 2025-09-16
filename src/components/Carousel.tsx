@@ -3,49 +3,47 @@ import styles from "../styles/components/_carousel.module.scss";
 import { useEffect, useRef, useState } from "react";
 
 const images = [
-  {
+  { id: 1,
     img: "https://images.pexels.com/photos/2112651/pexels-photo-2112651.jpeg",
     title: "T-Shirt",
   },
-  {
+  { id: 2,
     img: "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_3000,w_2000,f_auto,q_auto/8294205/724027_531108.png",
     title: "Pants",
   },
-  {
+  { id: 3,
     img: "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_3000,w_2000,f_auto,q_auto/8294205/475489_199739.jpeg",
     title: "Outer",
   },
-  {
+  { id: 4,
     img: "https://images.pexels.com/photos/2210899/pexels-photo-2210899.jpeg",
     title: "Hoodies",
-  },
-  {
+},
+  { id: 5,
     img: "https://media.etmall.com.tw/nximg/006274/6274363/6274363_xxl.jpg?t=22258414987",
     title: "Vest",
-  },
-  {
+},
+  { id: 6,
     img: "https://images.pexels.com/photos/2494607/pexels-photo-2494607.jpeg",
     title: "Accessories",
-  },
+},
 ];
-// const extendedImages = [
-//   images[images.length - 1], // 最後一張 clone
-//   ...images,
-//   images[0], // 第一張 clone
-// ];
+
 // 輪播內容物的顯示數量
 const contentToShow = 1;
 // 輪播切換時的速度，單位為ms
 const moveSpeed = 500;
 const slideWidth = 240;
 const gap = 24;
+
 const Carousel = () => {
   const slidesRef = useRef<HTMLDivElement>(null);
-  const slideRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState(0);
-  const [disableMove, setDisableMove] = useState(false);
+  const [slides, setSlides] = useState(images);
   const [distanceBetweenContent, setDistanceBetweenContent] = useState(0);
 
+  const [offset, setOffset] = useState(0); // translate 偏移
+  const [animating, setAnimating] = useState(false);
+const [currentIndex, setCurrentIndex] = useState(1);
   useEffect(() => {
     if (!slidesRef.current) return;
     Array.from(slidesRef.current.children).forEach((el) => {
@@ -55,14 +53,28 @@ const Carousel = () => {
   }, []);
 
   const move = (step: number) => {
-    if (disableMove) return;
-    if (
-      -(position - step) > images.length - contentToShow ||
-      position - step > 0
-    )
-      return;
+		setCurrentIndex((prev) => (prev + step + images.length) % images.length);
+    if (animating) return;
+    setAnimating(true);
+    setOffset(step); // step = 1 下一張, step = -1 上一張
+  };
 
-    setPosition((prev) => prev - step);
+  const handleTransitionEnd = () => {
+    setSlides((prev) => {
+      const newSlides = [...prev];
+      if (offset === 1) {
+        // 下一張 → 把第一個丟到最後
+        const first = newSlides.shift();
+        if (first) newSlides.push(first);
+      } else if (offset === -1) {
+        // 上一張 → 把最後一個丟到最前
+        const last = newSlides.pop();
+        if (last) newSlides.unshift(last);}
+      return newSlides;
+    });
+    // reset
+    setOffset(0);
+    setAnimating(false);
   };
 
   return (
@@ -73,20 +85,18 @@ const Carousel = () => {
           className={styles.slides}
           ref={slidesRef}
           style={{
-            transform: `translateX(${distanceBetweenContent * position}px)`,
-            transition: `transform ${moveSpeed}ms`,
+            transform: `translateX(${-offset * distanceBetweenContent}px)`,
+            transition: animating ? `transform ${moveSpeed}ms` : "none",
           }}
-          onTransitionStart={() => setDisableMove(true)}
-          onTransitionEnd={() => setDisableMove(false)}
+          onTransitionEnd={handleTransitionEnd}
         >
-          {images.map((image: { img: string; title: string }, idx) => (
+          {slides.map((image, idx) => (
             <div
               key={idx}
               className={styles.slide}
               style={{
                 backgroundImage: `url(${image.img})`,
               }}
-              ref={idx === 0 ? slideRef : null}
             >
               <p>{image.title}</p>
             </div>
@@ -103,7 +113,7 @@ const Carousel = () => {
           </button>
         </div>
         <div className={styles.decoration_line}></div>
-        <p>{String(Math.abs(position) + 1).padStart(2, "0")}</p>
+        <p>{String(currentIndex).padStart(2, "0")}</p>
       </div>
     </div>
   );
